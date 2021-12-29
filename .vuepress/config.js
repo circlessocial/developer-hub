@@ -1,5 +1,5 @@
 module.exports = {
-    base: "/mobile-hub/",
+    base: "/developer-hub/",
     temp: "docs/.vuepress/temp",
     title: 'Developer Hub',
     description: 'Mobile team documentation',
