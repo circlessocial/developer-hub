@@ -1,0 +1,20 @@
+{
+  "name": "mobile-hub",
+  "version": "1.0.0",
+  "description": "Documentation for mobile team",
+  "main": "index.js",
+  "repository": "https://github.com/KWXS/mobile-hub",
+  "author": "Lasha Kvantaliani",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.8.2",
+    "prettier": "^2.3.2"
+  },
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "dependencies": {
+    "vuepress-theme-default-prefers-color-scheme": "^2.0.0"
+  }
+}
