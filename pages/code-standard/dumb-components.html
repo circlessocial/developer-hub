@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dumb components | Development Hub</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    
+    <meta name="description" content="Mobile team documentation">
+    
+    <link rel="preload" href="/developer-hub/assets/css/0.styles.f7dbc6cb.css" as="style"><link rel="preload" href="/developer-hub/assets/js/app.edb44364.js" as="script"><link rel="preload" href="/developer-hub/assets/js/2.90a571ca.js" as="script"><link rel="preload" href="/developer-hub/assets/js/11.105d0d54.js" as="script"><link rel="prefetch" href="/developer-hub/assets/js/10.eae04669.js"><link rel="prefetch" href="/developer-hub/assets/js/12.627317b4.js"><link rel="prefetch" href="/developer-hub/assets/js/13.ccfe5aaa.js"><link rel="prefetch" href="/developer-hub/assets/js/14.e0e05bd2.js"><link rel="prefetch" href="/developer-hub/assets/js/15.f5b0b40c.js"><link rel="prefetch" href="/developer-hub/assets/js/3.47ac6eac.js"><link rel="prefetch" href="/developer-hub/assets/js/4.84239946.js"><link rel="prefetch" href="/developer-hub/assets/js/5.25e34ffb.js"><link rel="prefetch" href="/developer-hub/assets/js/6.fa4a2da1.js"><link rel="prefetch" href="/developer-hub/assets/js/7.70d1b5a9.js"><link rel="prefetch" href="/developer-hub/assets/js/8.b0e4cef3.js"><link rel="prefetch" href="/developer-hub/assets/js/9.a013d483.js">
+    <link rel="stylesheet" href="/developer-hub/assets/css/0.styles.f7dbc6cb.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/developer-hub/" class="home-link router-link-active"><!----> <span class="site-name">Development Hub</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Code standards</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/developer-hub/pages/code-standard/conventions.html" class="sidebar-link">Conventions</a></li><li><a href="/developer-hub/pages/code-standard/file-structure.html" class="sidebar-link">File Structure</a></li><li><a href="/developer-hub/pages/code-standard/data.html" class="sidebar-link">Data layer</a></li><li><a href="/developer-hub/pages/code-standard/import-and-export.html" class="sidebar-link">Imports and exports</a></li><li><a href="/developer-hub/pages/code-standard/components.html" class="sidebar-link">Components</a></li><li><a href="/developer-hub/pages/code-standard/dumb-components.html" aria-current="page" class="active sidebar-link">Dumb components</a></li><li><a href="/developer-hub/pages/code-standard/smart-components.html" class="sidebar-link">Smart components</a></li><li><a href="/developer-hub/pages/code-standard/styles.html" class="sidebar-link">Styles</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="dumb-components"><a href="#dumb-components" class="header-anchor">#</a> Dumb components</h1> <ul><li>Dumb components mainly will live under our <code>common components</code> but we might have some per application</li> <li>Each component must have own directory</li> <li>Directory will have the same name as component with camelCase</li> <li>Every component will have the following structure:
+<ul><li><code>ComponentName.jsx</code> - main files have no outside dependencies (no API calls, state free, any data from outside)</li> <li><code>ComponentName.style.js</code> - Style rules</li> <li><code>ComponentComponent.type.js</code> - <code>TypeScript</code> any type definition needed for this component (including view, main component etc)</li></ul></li> <li>We have to try to export small functionality as utility functions or as hooks</li></ul> <h1 id="naming-of-dumb-component-elements"><a href="#naming-of-dumb-component-elements" class="header-anchor">#</a> Naming of dumb component elements</h1> <p>As we said, dumb components only care how UI looks. So, when we are creating dumb components, even if in the given moment it's for a particular screen, we have to keep naming content agnostic.
+Let's say we have component which shows list of sent, confirmed and rejected invites:</p> <p>intuitively we might easily end up with such naming:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>View style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>labelsContainer<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>sent<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>rejected<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>balance<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Looks logical. Isn't it? But, some other developer might have almost the same component to implement:</p> <p>If you take a look, it looks the same. Just the icon is different and balance field is hidden. So, what would be the right approached to name component elements?</p> <p>What do you have to do, forget about the UI element's meaning inside of the screen and just focus on what visual role they have for the component itself. Here is the correct implementation of this component which fits other visual variations as well:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> View<span class="token punctuation">,</span> Text <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-native'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Icon <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@components'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>calendarIcon<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@images'</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">{</span>
+  containerStyled<span class="token punctuation">,</span>
+
+  topTitleContainerStyle<span class="token punctuation">,</span>
+  topTitleTextStyle<span class="token punctuation">,</span>
+  topTitle<span class="token punctuation">,</span>
+
+  titleContainerStyle<span class="token punctuation">,</span>
+  titleTextStyle<span class="token punctuation">,</span>
+  title<span class="token punctuation">,</span>
+
+  subTitleContainerStyle<span class="token punctuation">,</span>
+  subTitleTextStyle<span class="token punctuation">,</span>
+  bottomTitle<span class="token punctuation">,</span>
+
+  icon <span class="token operator">=</span> calendarIcon<span class="token punctuation">,</span>
+  iconStyle<span class="token punctuation">,</span>
+<span class="token punctuation">}</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>View style<span class="token operator">=</span><span class="token punctuation">{</span>styles<span class="token punctuation">.</span>container<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>View<span class="token operator">&gt;</span>
+        <span class="token punctuation">{</span><span class="token operator">!</span><span class="token operator">!</span>topTitle <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
+          <span class="token operator">&lt;</span>View style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>style<span class="token punctuation">.</span>topTitleContainer<span class="token punctuation">,</span> topTitleContainerStyle<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>style<span class="token punctuation">.</span>topTitleText<span class="token punctuation">,</span> topTitleTextStyle<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">{</span>topTitle<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span>
+        <span class="token punctuation">)</span><span class="token punctuation">}</span>
+
+        <span class="token punctuation">{</span><span class="token operator">!</span><span class="token operator">!</span>title <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
+          <span class="token operator">&lt;</span>View style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>style<span class="token punctuation">.</span>titleContainer<span class="token punctuation">,</span> titleContainerStyle<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>style<span class="token punctuation">.</span>titleText<span class="token punctuation">,</span> titleTextStyle<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">{</span>title<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span>
+        <span class="token punctuation">)</span><span class="token punctuation">}</span>
+
+        <span class="token punctuation">{</span><span class="token operator">!</span><span class="token operator">!</span>subTitle <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>
+          <span class="token operator">&lt;</span>View style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>style<span class="token punctuation">.</span>subTitleContainer<span class="token punctuation">,</span> subTitleContainerStyle<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>Text style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">[</span>style<span class="token punctuation">.</span>subTitleText<span class="token punctuation">,</span> subTitleTextStyle<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token punctuation">{</span>subTitle<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>Text<span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span>
+        <span class="token punctuation">)</span><span class="token punctuation">}</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span>
+      <span class="token punctuation">{</span><span class="token operator">&lt;</span>Icon src<span class="token operator">=</span><span class="token punctuation">{</span>icon<span class="token punctuation">}</span> style<span class="token operator">=</span><span class="token punctuation">{</span>iconStyle<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>View<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> styles <span class="token operator">=</span> StyleSheet<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    container<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    topTitleContainer<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    topTitleText<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    titleContainer<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    titleText<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+
+    subTitleContainer<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    subTitleText<span class="token operator">:</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p><strong><em>Few important notes</em></strong></p> <ul><li><p><code>Text</code> elements have an extra <code>View</code> Wrapper with style property. You might not need them now, but it gives more controls over the component. (for example, you might need to set background color with rounded corners for text, and make them look like as label)</p></li> <li><p>before logical AND <code>&amp;&amp;</code> operation Double negation <code>!!title</code> is used to check if property has value or not. <code>!!</code> ensures that value will be transformed to boolean. If we keep <code>title</code> directly, we might get empty value from API response, empty string won't be converted to <code>true</code> and react native will crash with error: <code>Invariant Violation: Text strings must be rendered within a &lt;Text&gt; component.</code>. You can use the same trick for <code>!!array.length</code></p></li> <li><p>Our conditional rendering check includes <code>View</code>. If value will be empty, view won't be rendered as well. Less elements are better for virtual DOM</p></li> <li><p>Properties for style have <code>containerStyle</code> ending. While normal styles have different suffixes, because class name identifies it as styles anyway: <code>styles.container</code></p></li> <li><p>To avoid name conflicts between container and text styles, and to keep consistency throughout the app, it's good to have this convention:
+container styles will have <code>...ContainerStyle</code> suffix and text styles <code>...textStyle</code></p></li> <li><p>There is no need for conditional rendering if property has default value. (<code>Icon</code> component has no check, because it has default value)</p></li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/developer-hub/pages/code-standard/components.html" class="prev">
+        Components
+      </a></span> <span class="next"><a href="/developer-hub/pages/code-standard/smart-components.html">
+        Smart components
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/developer-hub/assets/js/app.edb44364.js" defer></script><script src="/developer-hub/assets/js/2.90a571ca.js" defer></script><script src="/developer-hub/assets/js/11.105d0d54.js" defer></script>
+  </body>
+</html>

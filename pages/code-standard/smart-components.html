@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Smart components | Development Hub</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    
+    <meta name="description" content="Mobile team documentation">
+    
+    <link rel="preload" href="/developer-hub/assets/css/0.styles.f7dbc6cb.css" as="style"><link rel="preload" href="/developer-hub/assets/js/app.edb44364.js" as="script"><link rel="preload" href="/developer-hub/assets/js/2.90a571ca.js" as="script"><link rel="preload" href="/developer-hub/assets/js/14.e0e05bd2.js" as="script"><link rel="prefetch" href="/developer-hub/assets/js/10.eae04669.js"><link rel="prefetch" href="/developer-hub/assets/js/11.105d0d54.js"><link rel="prefetch" href="/developer-hub/assets/js/12.627317b4.js"><link rel="prefetch" href="/developer-hub/assets/js/13.ccfe5aaa.js"><link rel="prefetch" href="/developer-hub/assets/js/15.f5b0b40c.js"><link rel="prefetch" href="/developer-hub/assets/js/3.47ac6eac.js"><link rel="prefetch" href="/developer-hub/assets/js/4.84239946.js"><link rel="prefetch" href="/developer-hub/assets/js/5.25e34ffb.js"><link rel="prefetch" href="/developer-hub/assets/js/6.fa4a2da1.js"><link rel="prefetch" href="/developer-hub/assets/js/7.70d1b5a9.js"><link rel="prefetch" href="/developer-hub/assets/js/8.b0e4cef3.js"><link rel="prefetch" href="/developer-hub/assets/js/9.a013d483.js">
+    <link rel="stylesheet" href="/developer-hub/assets/css/0.styles.f7dbc6cb.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/developer-hub/" class="home-link router-link-active"><!----> <span class="site-name">Development Hub</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Code standards</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/developer-hub/pages/code-standard/conventions.html" class="sidebar-link">Conventions</a></li><li><a href="/developer-hub/pages/code-standard/file-structure.html" class="sidebar-link">File Structure</a></li><li><a href="/developer-hub/pages/code-standard/data.html" class="sidebar-link">Data layer</a></li><li><a href="/developer-hub/pages/code-standard/import-and-export.html" class="sidebar-link">Imports and exports</a></li><li><a href="/developer-hub/pages/code-standard/components.html" class="sidebar-link">Components</a></li><li><a href="/developer-hub/pages/code-standard/dumb-components.html" class="sidebar-link">Dumb components</a></li><li><a href="/developer-hub/pages/code-standard/smart-components.html" aria-current="page" class="active sidebar-link">Smart components</a></li><li><a href="/developer-hub/pages/code-standard/styles.html" class="sidebar-link">Styles</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="smart-components"><a href="#smart-components" class="header-anchor">#</a> Smart components</h1> <p>For our app, 99% of the time, <code>smart</code> components will be screen components.</p> <ul><li>We have to keep only one level of depth under the <code>screens</code> directory (to avoid deep nesting)</li> <li>Every directory under the <code>screen</code> directory is <code>Flow.</code></li> <li>Some flow might have one or multiple screens (e.g., <code>Dashboard</code> is <code>flow</code> with one screen, <code>Profile</code> is <code>flow</code> with multiple screens)</li> <li>Every screen name must have a prefix of the <code>Flow</code> it belongs (e.g., Flow: <code>Profile</code>, Screens: <code>ProfileDisplay</code>, <code>ProfileCreate</code>, <code>ProfileUpdate</code>)</li> <li>Every screen must have the same file structure (Sometimes for particular screens, some files won't be needed. Let's say some screens won't have a need to has <code>styles</code>, but style file needs to exist and imported inside of screen even it will be empty, because a) we have to keep consistency and b) we might need styles in the future so, the file will exist in advance c) we can use generators and will make life easier</li> <li>If flow has multiple screens, it might have <code>share</code> directory to keep some shared functionality between screens (For example, types, but we have to have shared files)</li></ul> <div class="language- extra-class"><pre class="language-text"><code>//before `screens &gt; profile`
+
+Profile
+ ┣ Create.tsx
+ ┣ Display.tsx
+ ┣ Update.tsx
+ ┣ index.ts
+ ┣ styles.ts
+ ┣ types.ts
+ ┗ utils.ts
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>//after
+
+Profile
+ ┣ ProfileCreate.style.ts
+ ┣ ProfileCreate.test.ts
+ ┣ ProfileCreate.tsx
+ ┣ ProfileCreate.type.ts
+ ┣ ProfileCreate.view.tsx
+ ┣ ProfileDisplay.style.ts
+ ┣ ProfileDisplay.test.ts
+ ┣ ProfileDisplay.tsx
+ ┣ ProfileDisplay.type.tsx
+ ┣ ProfileDisplay.view.tsx
+ ┣ ProfileUpdate.style.ts
+ ┣ ProfileUpdate.test.ts
+ ┣ ProfileUpdate.tsx
+ ┣ ProfileUpdate.type.ts
+ ┗ ProfileUpdate.view.tsx
+</code></pre></div><p>Some important notes:</p> <ul><li><p>We have to keep any Dumb components as shared as <code>components</code> library (same applies to <code>hooks</code> and <code>utilities</code>)</p></li> <li><p>Screen component will have almost the same structure as dumb components:</p> <ul><li><p><code>ScreenName.jsx</code> - Logic implementation, API calls, State management</p></li> <li><p><code>ScreenName.view.jsx</code> - only UI representation</p></li> <li><p><code>ScreenName.style.js</code> - Style rules. Mainly spacing between components etc</p></li> <li><p><code>ScreenName.type.js</code> - type definitions that belong to the same screen</p></li> <li><p><code>ScreenName.test.js</code> - for screens end to end tests</p></li> <li><p>As we said, we might have few screens under the directory which are part of the same feature. We don't need to group them by directory<br> <em>(Directories with single-screen will have the same structure as directories with multiple screens. Also, VSC will support. Don't forget to vote up this issue !!! <a href="https://github.com/microsoft/vscode/issues/6328" target="_blank" rel="noopener noreferrer">nesting files<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> soon</em><br></p></li> <li><p>If we'll have screens that have shared types, we can create an additional file as an exemption with flow name inside of a shared directory. (e.g. <code>Profile.type.ts</code>)
+<em>note: <code>share</code> directory is more exception then rule. It will be needed in very rear cases!</em></p></li></ul> <p>So, by the end of the day screen directory might look like this:</p></li></ul> <div class="language- extra-class"><pre class="language-text"><code>Profile
+ ┣ share
+ ┃ ┗ Profile.type.ts
+ ┣ ProfileCreate.style.ts
+ ┣ ProfileCreate.test.ts
+ ┣ ProfileCreate.tsx
+ ┣ ProfileCreate.type.ts
+ ┣ ProfileCreate.view.tsx
+ ┣ ProfileDisplay.style.ts
+ ┣ ProfileDisplay.test.ts
+ ┣ ProfileDisplay.tsx
+ ┣ ProfileDisplay.type.tsx
+ ┣ ProfileDisplay.view.tsx
+ ┣ ProfileUpdate.style.ts
+ ┣ ProfileUpdate.test.ts
+ ┣ ProfileUpdate.tsx
+ ┣ ProfileUpdate.type.ts
+ ┗ ProfileUpdate.view.tsx
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/developer-hub/pages/code-standard/dumb-components.html" class="prev">
+        Dumb components
+      </a></span> <span class="next"><a href="/developer-hub/pages/code-standard/styles.html">
+        Styles
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/developer-hub/assets/js/app.edb44364.js" defer></script><script src="/developer-hub/assets/js/2.90a571ca.js" defer></script><script src="/developer-hub/assets/js/14.e0e05bd2.js" defer></script>
+  </body>
+</html>

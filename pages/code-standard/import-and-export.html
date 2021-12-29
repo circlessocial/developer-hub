@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Imports and exports | Development Hub</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    
+    <meta name="description" content="Mobile team documentation">
+    
+    <link rel="preload" href="/developer-hub/assets/css/0.styles.f7dbc6cb.css" as="style"><link rel="preload" href="/developer-hub/assets/js/app.edb44364.js" as="script"><link rel="preload" href="/developer-hub/assets/js/2.90a571ca.js" as="script"><link rel="preload" href="/developer-hub/assets/js/13.ccfe5aaa.js" as="script"><link rel="prefetch" href="/developer-hub/assets/js/10.eae04669.js"><link rel="prefetch" href="/developer-hub/assets/js/11.105d0d54.js"><link rel="prefetch" href="/developer-hub/assets/js/12.627317b4.js"><link rel="prefetch" href="/developer-hub/assets/js/14.e0e05bd2.js"><link rel="prefetch" href="/developer-hub/assets/js/15.f5b0b40c.js"><link rel="prefetch" href="/developer-hub/assets/js/3.47ac6eac.js"><link rel="prefetch" href="/developer-hub/assets/js/4.84239946.js"><link rel="prefetch" href="/developer-hub/assets/js/5.25e34ffb.js"><link rel="prefetch" href="/developer-hub/assets/js/6.fa4a2da1.js"><link rel="prefetch" href="/developer-hub/assets/js/7.70d1b5a9.js"><link rel="prefetch" href="/developer-hub/assets/js/8.b0e4cef3.js"><link rel="prefetch" href="/developer-hub/assets/js/9.a013d483.js">
+    <link rel="stylesheet" href="/developer-hub/assets/css/0.styles.f7dbc6cb.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/developer-hub/" class="home-link router-link-active"><!----> <span class="site-name">Development Hub</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Code standards</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/developer-hub/pages/code-standard/conventions.html" class="sidebar-link">Conventions</a></li><li><a href="/developer-hub/pages/code-standard/file-structure.html" class="sidebar-link">File Structure</a></li><li><a href="/developer-hub/pages/code-standard/data.html" class="sidebar-link">Data layer</a></li><li><a href="/developer-hub/pages/code-standard/import-and-export.html" aria-current="page" class="active sidebar-link">Imports and exports</a></li><li><a href="/developer-hub/pages/code-standard/components.html" class="sidebar-link">Components</a></li><li><a href="/developer-hub/pages/code-standard/dumb-components.html" class="sidebar-link">Dumb components</a></li><li><a href="/developer-hub/pages/code-standard/smart-components.html" class="sidebar-link">Smart components</a></li><li><a href="/developer-hub/pages/code-standard/styles.html" class="sidebar-link">Styles</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="imports-and-exports"><a href="#imports-and-exports" class="header-anchor">#</a> Imports and exports</h1> <ul><li>We have to use named export instead of <code>export default</code><br>
+default exports allow developers to import modules with different names and we'll lose consistency.</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//bad</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//good</span>
+<span class="token keyword">export</span> <span class="token function-variable function">formatAmount</span> <span class="token operator">=</span>  <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+</code></pre></div><ul><li>Root directories with aliases (e.g. <code>components</code>, <code>screens</code>, <code>utilities</code>, <code>assets</code> etc), must have<code>index.ts</code> to export modules
+this will help to avoid name duplication of exported elements and keep imports cleaner</li></ul> <div class="language- extra-class"><pre class="language-text"><code>//example of file structure
+hooks
+ ┣ index.ts
+ ┣ types.ts
+ ┣ useForm.ts
+ ┣ useImageLibrary.ts
+ ┣ useLazyQuery.ts
+ ┣ useLogout.ts
+ ┣ useMe.ts
+ ┣ useMutation.ts
+ ┣ useQuery.ts
+ ┗ useToken.ts
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// index.js</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">&quot;./types&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">&quot;./useForm&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">&quot;./useImageLibrary&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">&quot;./useLazyQuery&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">&quot;./useLogout&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">&quot;./useMe&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">&quot;./useMutation&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">&quot;./useQuery&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">&quot;./useToken&quot;</span><span class="token punctuation">;</span>
+</code></pre></div><ul><li>We have to avoid imports with <code>* as</code> syntax (<code>import * as actions from ./actions</code>) (it imports every action, when we need only single one)</li> <li>If we are going to use third party library, better to import implicitly method which we need - this will optimize <code>js</code> bundle size</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//bad</span>
+<span class="token keyword">import</span> _ <span class="token keyword">from</span> <span class="token string">&quot;lodash&quot;</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//good</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>get<span class="token punctuation">}</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">lodash</span><span class="token template-punctuation string">`</span></span>
+</code></pre></div><p><strong>Aliases</strong></p> <ul><li>For root directories we have to use aliases. e.g:</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// bad</span>
+<span class="token keyword">import</span> AgentEducationScreen<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  AgentEducationStep<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;../../../screens/Agent/AgentEducation/AgentEducationScreen&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">//good</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> AgentEducationScreen<span class="token punctuation">,</span> AgentEducationStep <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@screens&quot;</span><span class="token punctuation">;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/developer-hub/pages/code-standard/data.html" class="prev">
+        Data layer
+      </a></span> <span class="next"><a href="/developer-hub/pages/code-standard/components.html">
+        Components
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/developer-hub/assets/js/app.edb44364.js" defer></script><script src="/developer-hub/assets/js/2.90a571ca.js" defer></script><script src="/developer-hub/assets/js/13.ccfe5aaa.js" defer></script>
+  </body>
+</html>
